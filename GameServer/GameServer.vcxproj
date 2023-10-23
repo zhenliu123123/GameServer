@@ -129,6 +129,7 @@
     <ClCompile Include="GameRole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="msg.pb.cpp" />
+    <ClCompile Include="testGitcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameChannel.h" />
