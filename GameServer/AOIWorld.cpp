@@ -49,6 +49,7 @@ std::list<Player*> AOIWorld::GetSurroundPlayers(Player* _player)
 		std::list<Player*> curPlayerList = mGridsVector[gridID - 1].mPlayersList;
 		listRet.insert(listRet.begin(), curPlayerList.begin(), curPlayerList.end());
 	}
+	//ÕıÓÒ±ß¸ñ×Ó
 	return listRet;
 }
 
