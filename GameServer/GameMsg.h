@@ -1,6 +1,7 @@
 #pragma once
 #include <zinx.h>
 #include<google/protobuf/message.h>
+#include<list>
 /**************************************************************************************************/
 /*消息ID		消息内容	   发送方向			客户端处理				服务器处理				  */
 /*	1		玩家ID和玩家姓名	 S->C		记录自己ID和姓名				无					  */
@@ -35,5 +36,12 @@ public:
 	//序列化：从结构化转换回二进制
 	std::string serialize();
 	virtual ~GameMsg();
+};
+//用户请求信息的列表
+class MultiMsg :
+	public UserData {
+public:
+	std::list<GameMsg*>	mMsgs;
+	virtual ~MultiMsg();
 };
 

@@ -123,15 +123,16 @@
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="AOIWorld.cpp" />
     <ClCompile Include="GameChannel.cpp" />
     <ClCompile Include="GameMsg.cpp" />
     <ClCompile Include="GameProtocol.cpp" />
     <ClCompile Include="GameRole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="msg.pb.cpp" />
-    <ClCompile Include="testGitcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AOIWorld.h" />
     <ClInclude Include="GameChannel.h" />
     <ClInclude Include="GameMsg.h" />
     <ClInclude Include="GameProtocol.h" />

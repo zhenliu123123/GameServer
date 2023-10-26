@@ -48,3 +48,11 @@ GameMsg::~GameMsg()
 {
 
 }
+
+MultiMsg::~MultiMsg()
+{
+	for (auto p : mMsgs)
+	{
+		delete p;
+	}
+}
