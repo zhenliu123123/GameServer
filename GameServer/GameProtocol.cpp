@@ -5,12 +5,24 @@
 #include"GameRole.h"
 //输入参数是从通道传来的原始报文 输入的是TCP流(可能是0.5条报文也可能是1.8条报文)
 //返回值是转换后的消息对象
+GameProtocol::GameProtocol()
+{
+}
+
+GameProtocol::~GameProtocol()
+{
+    if (NULL != mRole) {
+        ZinxKernel::Zinx_Del_Role(*mRole);
+        delete mRole;
+    }
+}
+
 UserData* GameProtocol::raw2request(std::string _szInput)
 {
     MultiMsg* pRet = new MultiMsg();
     szLast.append(_szInput);
     while (1) {
-        if (szLast.length() < 8) {
+        if (szLast.size() < 8) {
             break;
         }
         //将十六进制数转换成整型数，不能直接复制会忽略网络字节序(大端小端)
@@ -27,12 +39,12 @@ UserData* GameProtocol::raw2request(std::string _szInput)
         msgID |= szLast[6] << 16;
         msgID |= szLast[7] << 24;
         //检测是否够一整条报文
-        if (szLast.length() < msgLength + 8) {
+        if (szLast.size() - 8 < msgLength) {
             break;
         }
         GameMsg* pMsg = new GameMsg((GameMsg::MSG_TYPE)msgID, szLast.substr(8, msgLength));
-        szLast.erase(0, 8 + msgLength);//从缓存中弹出报文
         pRet->mMsgs.push_back(pMsg);//插入GameMsg玩家请求列表
+        szLast.erase(0, 8 + msgLength);//从缓存中弹出报文
     }
     ////调试信息
     //for (auto elem : pRet->mMsgs) {
@@ -53,11 +65,13 @@ std::string* GameProtocol::response2raw(UserData& _oUserData)
     int msgLength = 0;
     int msgID = 0;
     std::string msgContent;
+
     GET_REF2DATA(GameMsg, usrRequest, _oUserData);
     std::string* pRet = new std::string();
     msgID = usrRequest.enMsgType;
     msgContent = usrRequest.serialize();//直接用封装好的序列化（转二进制）函数
     msgLength = msgContent.size();
+
     pRet->push_back((msgLength >> 0) & 0xff);
     pRet->push_back((msgLength >> 8) & 0xff);
     pRet->push_back((msgLength >> 16) & 0xff);
@@ -83,3 +97,4 @@ Ichannel* GameProtocol::GetMsgSender(BytesMsg& _oBytes)
 {
     return mChannel;
 }
+

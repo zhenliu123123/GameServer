@@ -10,13 +10,16 @@ class GameProtocol :
 {
 public:
     std::string szLast;
+public:
+    GameProtocol();
+    virtual~GameProtocol();
+    //绑定
+    GameChannel* mChannel = NULL;
+    GameRole* mRole = NULL;
     // 通过 Iprotocol 继承
     virtual UserData* raw2request(std::string _szInput) override;
     virtual std::string* response2raw(UserData& _oUserData) override;
     virtual Irole* GetMsgProcessor(UserDataMsg& _oUserDataMsg) override;
     virtual Ichannel* GetMsgSender(BytesMsg& _oBytes) override;
-    //绑定
-    GameChannel* mChannel = nullptr;
-    GameRole* mRole = nullptr;
 };
 

@@ -46,7 +46,9 @@ std::string GameMsg::serialize()
 }
 GameMsg::~GameMsg()
 {
-
+	if (NULL != pMsg) {
+		delete pMsg;
+	}
 }
 
 MultiMsg::~MultiMsg()

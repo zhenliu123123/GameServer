@@ -3,14 +3,30 @@
 #include"GameMsg.h"
 #include"msg.pb.h"
 #include<cstdio>
-
+#include"AOIWorld.h"
+#include"ZinxTimer.h"
+////测试玩家类，继承玩家类
+//class testPlayer
+//	:public Player
+//{
+//public:
+//	testPlayer(int _x, int _y) :x(_x), y(_y) {}
+//
+//	int x=0;
+//	int y=0;
+//
+//	// 通过 Player 继承
+//	virtual int GetX() override
+//	{
+//		return x;
+//	}
+//	virtual int GetY() override
+//	{
+//		return y;
+//	}
+//};
 int main()
 {
-	ZinxKernel::ZinxKernelInit();
-	//添加监听通道类
-	ZinxKernel::Zinx_Add_Channel(*(new ZinxTCPListen(8899,new GameConnFact())));
-	ZinxKernel::Zinx_Run();
-	ZinxKernel::ZinxKernelFini();
 	////调试信息-testMsg未解析的二进制信息
 	//pb::SyncPid* pTestMsg = new pb::SyncPid();
 	//pTestMsg->set_pid(1);
@@ -28,5 +44,24 @@ int main()
 	//GameMsg gmTestInfo(GameMsg::MSG_TYPE_LOGIN_ID_NAME, strInfo);
 	//std::cout << dynamic_cast<pb::SyncPid*>(gmTestInfo.pMsg)->pid() << std::endl;
 	//std::cout << dynamic_cast<pb::SyncPid*>(gmTestInfo.pMsg)->username() << std::endl;
+	////调试信息
+	//testPlayer p1(60, 107);
+	//testPlayer p2(91, 118);
+	//testPlayer p3(147, 133);
+	//AOIWorld map(20, 200, 20, 230, 6, 6);
+	//map.AddPlayer(&p1);
+	//map.AddPlayer(&p2);
+	//map.AddPlayer(&p3);
+	//auto list = map.GetSurroundPlayers(&p1);
+	//for (auto elem : list) {
+	//	std::cout << "(" << dynamic_cast<testPlayer*>(elem)->GetX() << ","
+	//		<< dynamic_cast<testPlayer*>(elem)->GetY() << ")" << std::endl;
+	//}//
+	ZinxKernel::ZinxKernelInit();
+	//添加监听通道类
+	ZinxKernel::Zinx_Add_Channel(*(new ZinxTCPListen(8899,new GameConnFact())));
+	ZinxKernel::Zinx_Add_Channel(*new ZinxTimer());
+	ZinxKernel::Zinx_Run();
+	ZinxKernel::ZinxKernelFini();
 	return 0;
 }

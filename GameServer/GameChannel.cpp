@@ -9,6 +9,11 @@ GameChannel::GameChannel(int _fd):ZinxTcpData(_fd)
 
 GameChannel::~GameChannel()
 {
+    //回收资源
+    if (NULL != mProtocol) {
+        ZinxKernel::Zinx_Del_Proto(*mProtocol);
+        delete mProtocol;
+    }
 }
 
 //返回协议对象
