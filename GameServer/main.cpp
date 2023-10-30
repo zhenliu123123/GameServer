@@ -5,6 +5,7 @@
 #include<cstdio>
 #include"AOIWorld.h"
 #include"ZinxTimer.h"
+#include"RandomName.h"
 ////测试玩家类，继承玩家类
 //class testPlayer
 //	:public Player
@@ -25,6 +26,7 @@
 //		return y;
 //	}
 //};
+extern RandomName randName;
 int main()
 {
 	////调试信息-testMsg未解析的二进制信息
@@ -57,6 +59,7 @@ int main()
 	//	std::cout << "(" << dynamic_cast<testPlayer*>(elem)->GetX() << ","
 	//		<< dynamic_cast<testPlayer*>(elem)->GetY() << ")" << std::endl;
 	//}//
+	randName.LoadFile();
 	ZinxKernel::ZinxKernelInit();
 	//添加监听通道类
 	ZinxKernel::Zinx_Add_Channel(*(new ZinxTCPListen(8899,new GameConnFact())));

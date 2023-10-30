@@ -130,6 +130,7 @@
     <ClCompile Include="GameRole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="msg.pb.cpp" />
+    <ClCompile Include="RandomName.cpp" />
     <ClCompile Include="ZinxTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="GameProtocol.h" />
     <ClInclude Include="GameRole.h" />
     <ClInclude Include="msg.pb.h" />
+    <ClInclude Include="RandomName.h" />
     <ClInclude Include="ZinxTimer.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

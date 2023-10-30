@@ -7,8 +7,11 @@
 #include<algorithm>
 #include<random>
 #include"ZinxTimer.h"
+#include"RandomName.h"
+//创建全局随机姓名池对象
+RandomName randName;
 //创建全局随机数引擎
-static std::default_random_engine GameRandomEngine(time(NULL));
+static std::default_random_engine RoleRandomEngine(time(NULL));
 //创建AOIWorld全局对象
 static AOIWorld gameWorld(0,400,0,400,20,20);
 
@@ -160,13 +163,14 @@ GameMsg* GameRole::CreateTalkBroadCast(std::string _content)
 
 GameRole::GameRole()
 {
-    x = 100 + GameRandomEngine() % 30;
-    z = 100 + GameRandomEngine() % 30;
-    playerName = "zhenliu";
+    x = 100 + RoleRandomEngine() % 30;
+    z = 100 + RoleRandomEngine() % 30;
+    playerName = randName.GetName();
 }
 
 GameRole::~GameRole()
 {
+    randName.ReleaseName(playerName);
 }
 
 //创建定时器类继承定时器处理类
