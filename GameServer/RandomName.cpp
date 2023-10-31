@@ -3,6 +3,9 @@
 #include<iostream>
 #include<errno.h>
 #include<random>
+
+//bug:出现赵赵、王王这种名字
+
 static std::default_random_engine PoolRandomEngine(time(NULL));
 RandomName::RandomName()
 {
@@ -67,7 +70,7 @@ void RandomName::ReleaseName(std::string _name)
 	//节点已经被删除，创建节点
 	if (flag == 0) {
 		NamePoolNode* newNode = new NamePoolNode();
-		//newNode->mLastName = last; 为什么没写？初始化节点各个数据为什么没有初始化 姓？？
+		newNode->mLastName = last; //为什么没写？初始化节点各个数据为什么没有初始化 姓？？
 		newNode->mFirstNameVector.push_back(first);
 		mNamePool.push_back(newNode);
 	}

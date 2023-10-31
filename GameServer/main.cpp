@@ -27,6 +27,45 @@
 //	}
 //};
 extern RandomName randName;
+
+//创建守护进程
+void Daemonize() {
+	//1、fork创建子进程
+	int pid = fork();
+	if (pid < 0) {exit(-1);}
+	if (pid > 0) {
+		//2、父进程退出
+		exit(0);
+	}
+	//3、子进程开启会话，设置会话id
+	pid_t sid = setsid();
+	//4、子进程 设置执行路径(不必要)
+	//5、子进程 重定向3个文件描述到/dev/null
+	int nullFd = open("/dev/null", O_RDWR);
+	if (nullFd >= 0) {
+		dup2(nullFd, 0);
+		dup2(nullFd, 1);
+		dup2(nullFd, 2);
+		close(nullFd);
+	}
+	//进程监控
+	while (1) {
+		pid = fork();
+		if (pid < 0) {
+			exit(-1);
+		}
+		//父进程等子进程退出
+		if (pid>0) {
+			int status = 0;
+			wait(&status);
+			if (0 == status) {
+				exit(0);
+			}
+		}
+		else {break;}//子进程跳出循环执行游戏业务
+	}
+}
+
 int main()
 {
 	////调试信息-testMsg未解析的二进制信息
@@ -59,6 +98,8 @@ int main()
 	//	std::cout << "(" << dynamic_cast<testPlayer*>(elem)->GetX() << ","
 	//		<< dynamic_cast<testPlayer*>(elem)->GetY() << ")" << std::endl;
 	//}//
+	//
+	Daemonize();//守护进程化
 	randName.LoadFile();
 	ZinxKernel::ZinxKernelInit();
 	//添加监听通道类
