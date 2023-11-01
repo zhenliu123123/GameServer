@@ -1,5 +1,5 @@
 # GameServer
-
+![image]([https://github.com/MaiEmily/map/blob/master/public/image/20190528145810708.png](https://github.com/zhenliu123123/GameServer/blob/master/Readme.png))
 **需要游戏客户端的star后联系qq2368410997**
 
 游戏服务器
