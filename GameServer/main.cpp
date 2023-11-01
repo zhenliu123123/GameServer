@@ -98,7 +98,7 @@ int main()
 	//	std::cout << "(" << dynamic_cast<testPlayer*>(elem)->GetX() << ","
 	//		<< dynamic_cast<testPlayer*>(elem)->GetY() << ")" << std::endl;
 	//}//
-	//
+	
 	Daemonize();//守护进程化
 	randName.LoadFile();
 	ZinxKernel::ZinxKernelInit();

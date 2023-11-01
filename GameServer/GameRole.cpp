@@ -8,6 +8,8 @@
 #include<random>
 #include"ZinxTimer.h"
 #include"RandomName.h"
+#include<fstream>
+#include<hiredis/hiredis.h>
 //创建全局随机姓名池对象
 RandomName randName;
 //创建全局随机数引擎
@@ -219,6 +221,21 @@ bool GameRole::Init()
             ZinxKernel::Zinx_SendOut(*pMsg, *(pRole->mProtocol));
         }
     }
+
+    ////记录姓名到文件
+    //std::fstream recName("/tmp/tmpName", std::ios::app);
+    //recName<<playerName<<std::endl;
+    //recName.close();
+ 
+    //记录姓名到redis
+    redisContext* conn=redisConnect("127.0.0.1", 6379);
+    if (NULL != conn) {
+        redisReply* reply = (redisReply*)redisCommand(conn, "rpush usr_name %s", playerName.c_str());
+        freeReplyObject(reply);
+        redisFree(conn);
+    }
+
+
     return bRet;
 }
 
@@ -270,6 +287,31 @@ void GameRole::Fini()
     if (ZinxKernel::Zinx_GetAllRole().size()<=0) {
         TimerOutManager::getInstance().addTask(&exitTimer);
     }
+
+    ////下线时删除自己的名字
+    //std::string tmp;
+    //std::vector<std::string> curNameVector;
+    //std::ifstream delName("/tmp/tmpName", std::ios::in);
+    //while (getline(delName, tmp)) {
+    //    curNameVector.push_back(tmp);
+    //}
+    //delName.close();
+    //std::ofstream updateName("/tmp/tmpName", std::ios::out);
+    //for (std::string singleName : curNameVector) {
+    //    if (singleName != playerName) {
+    //        updateName << singleName << std::endl;
+    //    }
+    //}
+    //updateName.close();
+
+    //从redis中删除下线玩家姓名
+    redisContext* conn = redisConnect("127.0.0.1", 6379);
+    if (NULL != conn) {
+        redisReply* reply = (redisReply*)redisCommand(conn, "lrem usr_name 1 %s", playerName.c_str());
+        freeReplyObject(reply);
+        redisFree(conn);
+    }
+
 }
 
 //实现Player类的纯虚函数

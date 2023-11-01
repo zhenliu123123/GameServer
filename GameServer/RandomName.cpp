@@ -19,12 +19,17 @@ void RandomName::LoadFile()
 	if (!LastName.is_open()) { perror("LastName error"); }
 	std::fstream FirstName("randomFirstname.txt", std::ios::in);//名
 	if (!FirstName.is_open()) { perror("FiestName error"); }
+
+	//截取的时候根据文件内不同可能会截取到\n或者空格
+	//   geline默认以\n分割，并且会把\n读入
+	//   >>读的时候默认以空格分割，并且不读入空格
+
 	//读取所有名字组成一个线性表
-	while (std::getline(FirstName,tmpName)) {
+	while (FirstName>>tmpName) {
 		tmpFirNameVector.push_back(tmpName);
 	}
 	//读取所有姓，创建姓名池节点，拷贝名字组成的线性表
-	while (std::getline(LastName,tmpName)) {
+	while (LastName>>tmpName) {
 		NamePoolNode* namePoolNode = new NamePoolNode();
 		namePoolNode->mLastName = tmpName;
 		namePoolNode->mFirstNameVector = tmpFirNameVector;
@@ -34,21 +39,22 @@ void RandomName::LoadFile()
 
 std::string RandomName::GetName()
 {
-	std::string ret;
+	std::string pRet;
 	//取姓
 	auto num = PoolRandomEngine() % mNamePool.size();
 	std::string lastName = mNamePool[num]->mLastName;
 	//取名
 	auto randomIndex = PoolRandomEngine() % mNamePool[num]->mFirstNameVector.size();
 	std::string FirstName = mNamePool[num]->mFirstNameVector[randomIndex];
-	//拼接名字
-	ret = lastName + " " + FirstName;
 	//若本姓的所有名都取完了，把姓删掉
 	if (mNamePool[num]->mFirstNameVector.size()<=0) {
 		delete mNamePool[num];
 		mNamePool.erase(mNamePool.begin() + num);
 	}
-	return ret;
+	
+
+	pRet = lastName +" "+ FirstName;
+	return pRet;
 }
 
 void RandomName::ReleaseName(std::string _name)
@@ -75,6 +81,7 @@ void RandomName::ReleaseName(std::string _name)
 		mNamePool.push_back(newNode);
 	}
 }
+
 
 RandomName::~RandomName()
 {

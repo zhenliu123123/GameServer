@@ -145,7 +145,7 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -158,7 +158,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -184,7 +184,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -210,7 +210,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -223,7 +223,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -236,7 +236,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Link>
-      <LibraryDependencies>zinx;protobuf;pthread;%(LibraryDependencies)</LibraryDependencies>
+      <LibraryDependencies>zinx;protobuf;pthread;hiredis;%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-pthread</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/usr/local/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
